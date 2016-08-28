@@ -473,7 +473,7 @@ static int mb_access_checker(request_rec *r)
   if ((apr_table_do(mb_check_ip, r->connection->client_ip, blacklist_table, NULL) == FALSE) && 
       (apr_table_do(mb_check_ip, r->connection->client_ip, whitelist_table, NULL) == TRUE)) { 
     ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, r->server,
-		 "Deny IP %s (blacklist)",r->connection->client_ip,key);
+		 "Deny IP %s (blacklist), Key %s",r->connection->client_ip,key);
     return HTTP_FORBIDDEN;
   }
 
