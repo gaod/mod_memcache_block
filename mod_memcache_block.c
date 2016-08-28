@@ -208,7 +208,7 @@ static mb_cfg *our_sconfig(const server_rec *s)
 }
 
 /* rebuild the block list */
-static mb_refresh_blocklist(server_rec *s)
+static void mb_refresh_blocklist(server_rec *s)
 {
   mb_cfg *cfg;
   char *result;
