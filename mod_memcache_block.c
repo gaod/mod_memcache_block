@@ -536,7 +536,7 @@ static int mb_logger(request_rec *r)
 
       snprintf(key, 254, "%s:c:%s:%d",sconf->prefix,r->connection->client_ip,rl->response_code);
       snprintf(lastkey, 254, "%s:l:%s:%d",sconf->prefix,r->connection->client_ip,rl->response_code);
-      snprintf(time_s, 15, "%d",time(NULL));
+      snprintf(time_s, 15, "%ld",time(NULL));
       
       mc_error = memcached_increment(mb_memcache, key, strlen(key), 1, &count);
       
@@ -554,7 +554,7 @@ static int mb_logger(request_rec *r)
 	return DECLINED;
       } else {
 	ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, r->server,
-		     "memcache_block: key %s count=%d",key, count);
+		     "memcache_block: key %s count=%lu",key, count);
       }
       
       /* check limits */
@@ -568,7 +568,7 @@ static int mb_logger(request_rec *r)
 			 "Memcache Error (in lockout): key %s: %s",key, memcached_strerror(mb_memcache,mc_error));
 	} else {
 	  ap_log_error(APLOG_MARK, APLOG_DEBUG, 0, r->server,
-		       "memcache_block: lockout ip %s, %d %ds in %d interval",r->connection->client_ip, count, r->status, rl->time);
+		       "memcache_block: lockout ip %s, %lu %ds in %d interval",r->connection->client_ip, count, r->status, rl->time);
 	}
 	return HTTP_FORBIDDEN;
       }
