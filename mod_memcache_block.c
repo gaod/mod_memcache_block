@@ -416,6 +416,7 @@ static int mb_init(apr_pool_t * p, apr_pool_t * plog,
   /* finally, refresh the blocklist */
   mb_refresh_blocklist(s);
 
+  return OK;
 }
 
 /* callback used when we walk the array */
