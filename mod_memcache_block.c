@@ -369,6 +369,7 @@ static void *mb_merge_server_config(apr_pool_t *p, void *server1_conf,
   if (s2conf->response_limiter != NULL) {
     merged_config->response_limiter = apr_hash_copy(p, s2conf->response_limiter);
   }
+  return (void*) merged_config;
 }
 
 static apr_status_t mb_child_exit(void *data)
